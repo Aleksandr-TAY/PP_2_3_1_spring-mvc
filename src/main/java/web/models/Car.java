@@ -3,12 +3,9 @@ package web.models;
 public class Car {
     private int id;
     private String model;
-    private int series;
+    private String series;
 
-    public Car() {
-    }
-
-    public Car(int id, String model, int series) {
+    public Car(int id, String model, String series) {
         this.id = id;
         this.model = model;
         this.series = series;
@@ -30,20 +27,11 @@ public class Car {
         this.model = model;
     }
 
-    public int getSeries() {
+    public String getSeries() {
         return series;
     }
 
-    public void setSeries(int series) {
+    public void setSeries(String series) {
         this.series = series;
-    }
-
-    @Override
-    public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", model='" + model + '\'' +
-                ", series=" + series +
-                '}';
     }
 }
