@@ -5,11 +5,12 @@ import web.models.Car;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 @Component
-public class CarServiceImpl implements CarService{
+public class CarServiceImpl implements CarService {
     private static int CARS_COUNT;
     private List<Car> carsList;
+
     {
         carsList = new ArrayList<>();
         carsList.add(new Car(++CARS_COUNT, "Honda", "Stream"));
@@ -18,6 +19,7 @@ public class CarServiceImpl implements CarService{
         carsList.add(new Car(++CARS_COUNT, "Mercedes", "600"));
         carsList.add(new Car(++CARS_COUNT, "Opel", "Astra"));
     }
+
     @Override
     public List<Car> showAllCars() {
         return carsList;
@@ -25,6 +27,6 @@ public class CarServiceImpl implements CarService{
 
     @Override
     public List<Car> showFromOneTillFourCars(int count) {
-        return count < 5 ?  showAllCars().subList(0, count) : showAllCars();
+        return count < 5 ? showAllCars().subList(0, count) : showAllCars();
     }
 }
