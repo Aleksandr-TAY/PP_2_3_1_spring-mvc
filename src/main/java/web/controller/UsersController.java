@@ -3,9 +3,12 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import web.Service.UserService;
 import web.models.User;
+
+import javax.validation.Valid;
 
 @Controller
 public class UsersController {
@@ -30,9 +33,12 @@ public class UsersController {
 		return "new";
 	}
 	@PostMapping()
-	public String create(@ModelAttribute("user") User user) {
-		userService.addUser(user);
-		return "redirect:/";
+	public String create(@Valid @ModelAttribute("user")  User user, BindingResult bindingResult) {
+		if (bindingResult.hasErrors())
+			return "/new";
+
+			userService.addUser(user);
+			return "redirect:/";
 	}
 
 	@GetMapping("/{id}/edit")
@@ -42,7 +48,10 @@ public class UsersController {
 	}
 
 	@PatchMapping("/{id}")
-	public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+	public String update(@Valid @ModelAttribute("user")  User user, BindingResult bindingResult, @PathVariable("id") int id) {
+		if (bindingResult.hasErrors())
+			return "/edit";
+
 		userService.updateUser(id, user);
 		return "redirect:/";
 	}
